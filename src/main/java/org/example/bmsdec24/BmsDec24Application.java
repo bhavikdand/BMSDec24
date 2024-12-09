@@ -23,7 +23,7 @@ public class BmsDec24Application implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         SignupRequestDto requestDto = new SignupRequestDto();
-        requestDto.setEmail("john@doe4.com");
+        requestDto.setEmail("john@doe5.com");
         requestDto.setPassword("123456789");
         requestDto.setName("John Doe");
         userController.signUp(requestDto);
