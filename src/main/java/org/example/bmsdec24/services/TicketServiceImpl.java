@@ -45,7 +45,7 @@ public class TicketServiceImpl implements TicketService{
 
          */
         User user = this.userRepository.findById(userId).orElseThrow(() -> new InvalidUserException("User not found"));
-        List<ShowSeat> showSeats = this.showSeatRepository.findAllByIdInAndSeatStatus_Available(showSeatIds);
+        List<ShowSeat> showSeats = null; // this.showSeatRepository.findAllByIdInAndSeatStatus_AVAILABLE(showSeatIds);
         if(showSeats.size() != showSeatIds.size()){
             //Write logic to calculate the exact seats that are blocked.
             throw new SomeOrAllSeatsAreUnavailable("Some/All seats are booked");

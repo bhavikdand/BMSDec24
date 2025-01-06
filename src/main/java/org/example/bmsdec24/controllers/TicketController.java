@@ -1,5 +1,8 @@
 package org.example.bmsdec24.controllers;
 
+import org.example.bmsdec24.dtos.BookTicketRequestDto;
+import org.example.bmsdec24.dtos.SignupRequestDto;
+import org.example.bmsdec24.exceptions.InvalidBookTicketRequestException;
 import org.example.bmsdec24.exceptions.InvalidUserException;
 import org.example.bmsdec24.exceptions.SomeOrAllSeatsAreUnavailable;
 import org.example.bmsdec24.models.Ticket;
@@ -20,13 +23,24 @@ public class TicketController {
     }
 
     //Create a dto for request params and response params
-    public Ticket bookTicket(List<Integer> showSeatIds, int userId){
+    public Ticket bookTicket(BookTicketRequestDto requestDto){
         try{
-            Ticket ticket = ticketService.bookTicket(userId, showSeatIds);
+            validateBookTicketRequestDto(requestDto);
+            Ticket ticket = ticketService.bookTicket(requestDto.getUserId(), requestDto.getShowSeatIds());
             return ticket;
-        } catch (Exception e) {
+        } catch (Exception e){
             return null;
         }
 
+    }
+
+    private void validateBookTicketRequestDto(BookTicketRequestDto requestDto) throws InvalidBookTicketRequestException {
+        if(requestDto.getUserId() <= 0){
+            throw new InvalidBookTicketRequestException("User id cannot be negative");
+        }
+
+        if(requestDto.getShowSeatIds() == null || requestDto.getShowSeatIds().isEmpty()){
+            throw new InvalidBookTicketRequestException("Show seat ids cannot be empty");
+        }
     }
 }

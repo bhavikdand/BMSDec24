@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface ShowSeatRepository extends JpaRepository<ShowSeat, Integer> {
 
-    @Lock(LockModeType.PESSIMISTIC_READ)
-    List<ShowSeat> findAllByIdInAndSeatStatus_Available(List<Integer> ids);
+//    @Lock(LockModeType.PESSIMISTIC_READ)
+//    List<ShowSeat> findAllByIdInAndSeatStatus_AVAILABLE(List<Integer> ids);
 }
